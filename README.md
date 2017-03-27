@@ -2,8 +2,8 @@
 
 ## 安装:
 
->  composer require yii-ding-bot
->
+>  composer require suilihui/yii-ding-bot
+
 >  composer install
 
 ## 机器人所需数据结构:
