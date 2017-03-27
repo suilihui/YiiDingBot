@@ -1,10 +1,11 @@
 # YiiDingBot
 
-## 安装
+## 安装:
 > composer require yii-ding-bot
 > composer install
 
-## 机器人数据结构
+## 机器人所需数据结构:
+> 请在Yii的 config/params.php 中添加如下数据结构:
 ```
 "technology" => [
 	   // 机器人token
@@ -18,5 +19,5 @@
     ],
 ```
 
-## 测试
+## 测试:
 > php example.php
