@@ -21,12 +21,18 @@ class YiiDingBot
         $bot->sendMsg($content, $group['at']);
    	}
     
-    
-    	protected static function getGroup($groupString)
-    	{
-        $yiiConf = isset(Yii::$app->params) ? Yii::$app->params : [];
-        
+
+    /**
+     *  获取机器人信息
+     */
+    protected static function getGroup($groupString)
+    {
+        if (!isset(Yii::$app->params["DingRobot"])) {
+            throw new \Exception("请在Yii的 common/config/params-local.php 中添加机器人所需数据结构，具体请查看README.md!");
+        }
+        $yiiConf = Yii::$app->params["DingRobot"];
         $group = explode(".", $groupString);
+
         if (is_array($group) && count($group) > 1)
         {
             $token = isset($yiiConf[$group[0]]['token']) ? $yiiConf[$group[0]]['token'] : '';
@@ -42,10 +48,10 @@ class YiiDingBot
             $token = '';
             $at = [];
         }
-        
+
         return [
             'token' => $token,
             'at' => $at,
         ];
-    	}
+    }
 }
