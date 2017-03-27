@@ -32,7 +32,7 @@ class YiiDingBot
             $token = isset($yiiConf[$group[0]]['token']) ? $yiiConf[$group[0]]['token'] : '';
             $at = isset($yiiConf[$group[0]]['at'][$group[1]]) ? $yiiConf[$group[0]]['at'][$group[1]] : [];
         }
-        else if ($count($group) == 1)
+        else if (count($group) == 1)
         {
             $token = isset($yiiConf[$group[0]]['token']) ? $yiiConf[$group[0]]['token'] : '';
             $at = [];
