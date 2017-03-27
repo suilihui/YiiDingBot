@@ -7,7 +7,7 @@
 >  composer install
 
 ## 机器人所需数据结构:
-> 请在Yii的 config/params-local.php 中添加如下数据结构:
+> 请在Yii的 common/config/params-local.php 中添加如下数据结构:
 ```
 "DingRobot" => [
 	"technology" => [
