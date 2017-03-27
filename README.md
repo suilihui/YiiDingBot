@@ -2,8 +2,9 @@
 
 ## 安装:
 
->>  composer require yii-ding-bot
->>  composer install
+>  composer require yii-ding-bot
+>
+>  composer install
 
 ## 机器人所需数据结构:
 > 请在Yii的 config/params.php 中添加如下数据结构:
