@@ -1,0 +1,20 @@
+{
+    "name": "suilihui/yii-ding-bot",
+    "description": "Yii framework send dingding message",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "suilihui",
+            "email": "466066151@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "suilihui/ding-bot": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "YiiDingBot\\": "src/YiiDingBot"
+        }
+    }
+}
