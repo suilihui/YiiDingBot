@@ -3,6 +3,7 @@
 namespace YiiDingBot;
 
 use Ding\DingBot\DingBot;
+use yii\helpers\ArrayHelper;
 use Yii;
 
 class YiiDingBot
@@ -27,27 +28,22 @@ class YiiDingBot
      */
     protected static function getGroup($groupString)
     {
-        if (!isset(Yii::$app->params["DingRobot"])) {
-            throw new \Exception("请在Yii的 common/config/params-local.php 中添加机器人所需数据结构，具体请查看README.md!");
-        }
-        $yiiConf = Yii::$app->params["DingRobot"];
-        $group = explode(".", $groupString);
+        $dingRobot = ArrayHelper::getValue(Yii::$app->params, 'DingRobot');
+        $watchdog = '05dbf73b738adb746c50f99e3695a9ca9233327dd6f4431763687de9a1812491';
 
-        if (is_array($group) && count($group) > 1)
-        {
-            $token = isset($yiiConf[$group[0]]['token']) ? $yiiConf[$group[0]]['token'] : '';
-            $at = isset($yiiConf[$group[0]]['at'][$group[1]]) ? $yiiConf[$group[0]]['at'][$group[1]] : [];
+        if (ArrayHelper::getValue(Yii::$app->params, 'environment') != 'production') {
+            return [
+                'token' => ArrayHelper::getValue($dingRobot, 'watchdog.token', $watchdog),
+                'at' => [],
+            ];
         }
-        else if (count($group) == 1)
-        {
-            $token = isset($yiiConf[$group[0]]['token']) ? $yiiConf[$group[0]]['token'] : '';
-            $at = [];
-        }
-        else
-        {
-            $token = '';
-            $at = [];
-        }
+
+        $group = explode(".", $groupString);
+        $token = (isset($group[0]) && !empty($group[0])) ?
+            ArrayHelper::getValue($dingRobot, "{$group[0]}.token", $watchdog) : $watchdog;
+
+        $at = isset($group[1]) && !empty($group[1]) ?
+            ArrayHelper::getValue($dingRobot, "{$group[0]}.at.{$group[1]}", []) : [];
 
         return [
             'token' => $token,
