@@ -23,7 +23,7 @@ class YiiDingBot
    	}
 
     /**
-     * 获取机器人信息
+     * 获取机器人配置信息
      * @param $groupString
      * @return array
      */
