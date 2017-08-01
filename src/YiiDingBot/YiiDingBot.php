@@ -34,14 +34,15 @@ class YiiDingBot
 
         if (ArrayHelper::getValue(Yii::$app->params, 'environment') != 'production') {
             return [
-                'token' => ArrayHelper::getValue($dingRobot, 'watchdog.token', $watchdog),
+                'token' => ArrayHelper::getValue($dingRobot, 'dev_test.token', $watchdog),
                 'at' => [],
             ];
         }
 
         $group = explode(".", $groupString);
         $token = (isset($group[0]) && !empty($group[0])) ?
-            ArrayHelper::getValue($dingRobot, "{$group[0]}.token", $watchdog) : $watchdog;
+            ArrayHelper::getValue($dingRobot, "{$group[0]}.token", $watchdog) :
+            ArrayHelper::getValue($dingRobot, 'trashcan.token', '');
 
         $at = isset($group[1]) && !empty($group[1]) ?
             ArrayHelper::getValue($dingRobot, "{$group[0]}.at.{$group[1]}", []) : [];
