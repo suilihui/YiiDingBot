@@ -16,7 +16,7 @@ class YiiDingBot
 	 */
 	public static function sendMessage($groupStr, $content)
    	{
-        $group = self::getGroup($groupStr);
+        $group = self::getToken($groupStr);
         
         $bot = DingBot::getInstance($group['token']);
         $bot->sendMsg($content, $group['at']);
@@ -26,7 +26,7 @@ class YiiDingBot
     /**
      *  获取机器人信息
      */
-    protected static function getGroup($groupString)
+    protected static function getToken($groupString)
     {
         $dingRobot = ArrayHelper::getValue(Yii::$app->params, 'DingRobot');
         $watchdog = '05dbf73b738adb746c50f99e3695a9ca9233327dd6f4431763687de9a1812491';
