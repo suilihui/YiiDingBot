@@ -21,10 +21,11 @@ class YiiDingBot
         $bot = DingBot::getInstance($group['token']);
         $bot->sendMsg($content, $group['at']);
    	}
-    
 
     /**
-     *  获取机器人信息
+     * 获取机器人信息
+     * @param $groupString
+     * @return array
      */
     protected static function getToken($groupString)
     {
