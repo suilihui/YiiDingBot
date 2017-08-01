@@ -29,7 +29,9 @@ class YiiDingBot
      */
     protected static function getToken($groupString)
     {
+        // 取钉钉机器人配置
         $dingRobot = ArrayHelper::getValue(Yii::$app->params, 'DingRobot');
+        // 开发测试群token
         $watchdog = '05dbf73b738adb746c50f99e3695a9ca9233327dd6f4431763687de9a1812491';
 
         if (ArrayHelper::getValue(Yii::$app->params, 'environment') != 'production') {
@@ -40,10 +42,11 @@ class YiiDingBot
         }
 
         $group = explode(".", $groupString);
-        $token = (isset($group[0]) && !empty($group[0])) ?
-            ArrayHelper::getValue($dingRobot, "{$group[0]}.token", $watchdog) :
-            ArrayHelper::getValue($dingRobot, 'trashcan.token', '');
+        // 线上未找到钉钉配置的通知，发送到垃圾消息群
+        $trashcan = ArrayHelper::getValue($dingRobot, 'trashcan.token', $watchdog);
 
+        $token = (isset($group[0]) && !empty($group[0])) ?
+            ArrayHelper::getValue($dingRobot, "{$group[0]}.token", $trashcan) : $trashcan;
         $at = isset($group[1]) && !empty($group[1]) ?
             ArrayHelper::getValue($dingRobot, "{$group[0]}.at.{$group[1]}", []) : [];
 
